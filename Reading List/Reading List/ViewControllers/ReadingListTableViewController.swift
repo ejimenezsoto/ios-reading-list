@@ -37,7 +37,7 @@ class ReadingListTableViewController: UITableViewController {
 
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "ReadingListTableViewCell", for: indexPath) as? BookTableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "BookCell", for: indexPath) as? BookTableViewCell {
             
             let book = bookFor(indexPath: indexPath)
             cell.delegate = self

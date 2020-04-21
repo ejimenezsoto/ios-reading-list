@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReadingListTableViewCell" rowHeight="55" id="Syp-qU-mW4" customClass="BookTableViewCell" customModule="Reading_List" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BookCell" rowHeight="55" id="Syp-qU-mW4" customClass="BookTableViewCell" customModule="Reading_List" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="55"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Syp-qU-mW4" id="fmy-Mx-qQa">
@@ -110,7 +110,7 @@
                     <navigationItem key="navigationItem" title="Title" id="THp-dY-08L">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="ggq-yD-djq">
                             <connections>
-                                <action selector="saveBook:" destination="uB1-hT-blB" id="CYK-pC-vxU"/>
+                                <action selector="saveBook:" destination="uB1-hT-blB" id="TPE-AU-dvJ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

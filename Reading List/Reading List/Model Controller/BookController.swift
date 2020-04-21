@@ -24,7 +24,7 @@ class BookController {
         
         let fileManager = FileManager.default
         let documentsDir = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first
-        let booksURL = documentsDir?.appendingPathComponent("ReadingList.plist")
+        let booksURL = documentsDir?.appendingPathComponent("Info.plist")
         
         return booksURL
     }
@@ -35,7 +35,9 @@ class BookController {
     }
 
     func createBook(title: String, reasonToRead: String) {
+        
         var book = Book(title: title, reasonToRead: reasonToRead)
+        
         books.append(book)
         saveToPersistentStore()
     }
