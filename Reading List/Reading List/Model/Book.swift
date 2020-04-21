@@ -8,18 +8,14 @@
 
 import Foundation
 
-class Book: Equatable, Codable {
-    static func == (lhs: Book, rhs: Book) -> Bool {
-        return lhs.title == rhs.title && lhs.reasonToRead == rhs.reasonToRead && lhs.hasBeenRead == rhs.hasBeenRead// ?
-    }
-    
+struct Book: Equatable, Codable {
     var title: String
     var reasonToRead: String
     var hasBeenRead: Bool
-    
-    init(title: String, reasonToRead: String, hasBeenRead: Bool = false) {
+
+    init(title: String, reasonToRead: String) {
         self.title = title
         self.reasonToRead = reasonToRead
-        self.hasBeenRead = hasBeenRead
+        self.hasBeenRead = false
     }
 }

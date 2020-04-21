@@ -10,27 +10,45 @@ import UIKit
 
 class BookTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var bookTitleLabel: UILabel!
+    @IBOutlet weak var hasBeenReadButton: UIButton!
     
-    @IBOutlet weak var readButtonLabel: UIButton!
-    
-    @IBAction func readButtonTapped(_ sender: UIButton) {
-        delegate?.toggleHasBeenRead(for: self)
-    }
-    
-    var delegate: BookTableViewDelegate?
-    
+    var delegate: BookTableViewCellDelegate?
     var book: Book? {
         didSet {
             updateViews()
+            
         }
+    }
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+//        updateViews()
     }
     
     func updateViews() {
-        titleLabel.text = book?.title
+        if let book = book {
+            bookTitleLabel.text = book.title
+            print(book.title, book.hasBeenRead)
+            if book.hasBeenRead {
+                hasBeenReadButton.setImage(UIImage(named: "checked"), for: .normal)
+            } else {
+                hasBeenReadButton.setImage(UIImage(named: "unchecked"), for: .normal)
+            }
+        }
     }
-    
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
+
+    @IBAction func hasBeenReadButtonTapped(_ sender: UIButton) {
+        delegate?.toggleHasBeenRead(for: self)
+    }
 
 }
+
 
 

@@ -24,8 +24,8 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="55"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0pU-dV-TTf">
-                                            <rect key="frame" x="20" y="17" width="42" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0pU-dV-TTf">
+                                            <rect key="frame" x="20" y="17" width="33.5" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -37,7 +37,7 @@
                                             </constraints>
                                             <state key="normal" image="unchecked"/>
                                             <connections>
-                                                <action selector="readButtonTapped:" destination="Syp-qU-mW4" eventType="touchUpInside" id="KVr-3r-70f"/>
+                                                <action selector="hasBeenReadButtonTapped:" destination="Syp-qU-mW4" eventType="touchUpInside" id="2Yb-Sq-P9a"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -51,8 +51,8 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="readButtonLabel" destination="dML-gj-iU4" id="48n-RQ-5ff"/>
-                                    <outlet property="titleLabel" destination="0pU-dV-TTf" id="KBU-Hg-Wr4"/>
+                                    <outlet property="bookTitleLabel" destination="0pU-dV-TTf" id="qgh-fz-5N5"/>
+                                    <outlet property="hasBeenReadButton" destination="dML-gj-iU4" id="Uce-Ux-acj"/>
                                     <segue destination="uB1-hT-blB" kind="show" identifier="showBookSegue" id="sE6-Hq-gE3"/>
                                 </connections>
                             </tableViewCell>
@@ -65,7 +65,7 @@
                     <navigationItem key="navigationItem" title="Reading List" id="2fO-eG-XqH">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="U9j-OW-7dq">
                             <connections>
-                                <segue destination="uB1-hT-blB" kind="show" identifier="addBookSegue" id="5kc-9E-1B0"/>
+                                <segue destination="uB1-hT-blB" kind="show" id="5gt-C5-cqX"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -87,7 +87,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Reasons to read" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="onQ-oE-4j4">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Reasons to read:" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="onQ-oE-4j4">
                                 <rect key="frame" x="20" y="242" width="374" height="234"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -110,13 +110,13 @@
                     <navigationItem key="navigationItem" title="Title" id="THp-dY-08L">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="ggq-yD-djq">
                             <connections>
-                                <action selector="saveTapped:" destination="uB1-hT-blB" id="SBL-9E-yMX"/>
+                                <action selector="saveBook:" destination="uB1-hT-blB" id="CYK-pC-vxU"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="reasonToReadTextField" destination="onQ-oE-4j4" id="uY2-kv-8bB"/>
-                        <outlet property="titleTextField" destination="5t4-tP-ARU" id="4Hn-EI-eO0"/>
+                        <outlet property="bookTitleTextField" destination="5t4-tP-ARU" id="m4G-KB-PMD"/>
+                        <outlet property="reasonToReadTextView" destination="onQ-oE-4j4" id="Sq8-hv-xSj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gYi-eH-7jd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -146,6 +146,6 @@
         <image name="unchecked" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="5kc-9E-1B0"/>
+        <segue reference="sE6-Hq-gE3"/>
     </inferredMetricsTieBreakers>
 </document>

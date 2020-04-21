@@ -9,103 +9,85 @@
 import Foundation
 
 class BookController {
+    
+    var books: [Book]
 
-    
-    init() {
-        loadFromPersistentStore()
-    }
-    
-      var books: [Book] = [Book(title: "Dune", reasonToRead: "its cool"), Book(title: "LoTR: Fellowship of The Rings", reasonToRead: "Why not")]
-    
-    @discardableResult func createBook(title: String, reasonToRead: String, hasBeenRead: Bool) -> Book {
-      
-        let book  = Book(title: title, reasonToRead: reasonToRead, hasBeenRead: hasBeenRead)
-        
-        books.append(book)
-        saveToPersistentStore()
-        
-        return book
-    }
-    
-    
-    func deleteBook(bookToDelete: Book) {
-       
-        saveToPersistentStore()
-    }
-    
-    func updateHasBeenRead(for book: Book) {
-    
-        if book.hasBeenRead {
-            book.hasBeenRead = false
-        }
-        else {
-            book.hasBeenRead = true
-        }
-        saveToPersistentStore()
-    }
-    
-    func updateTitleAndReason() {
-     
-        saveToPersistentStore()
-    }
-    
     var readBooks: [Book] {
-        return books.filter {$0.hasBeenRead}
+        return books.filter { $0.hasBeenRead }
     }
     
     var unreadBooks: [Book] {
-        return books.filter {$0.hasBeenRead == false}
+        return books.filter { !$0.hasBeenRead }
     }
     
-    
-
     var readingListURL: URL? {
         
         let fileManager = FileManager.default
-        
-        // Go to the documents directory of our app
-        guard let documentsDir = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {return nil}
-        
-        let booksURL = documentsDir.appendingPathComponent("readinglist.plist")
+        let documentsDir = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first
+        let booksURL = documentsDir?.appendingPathComponent("ReadingList.plist")
         
         return booksURL
     }
     
-   
-    func saveToPersistentStore() {
-        
-        do {
-            
-             guard let readingListURL = readingListURL else {return}
-            
-            let encoder = PropertyListEncoder()
-            
-            let booksData = try encoder.encode(books)
-            
-            try booksData.write(to: readingListURL)
-            
-            
-        } catch {
-            print("Error saving books: \(error)")
-        }
-        
+    init() {
+        books = []
+        loadFromPersistentStore()
     }
 
-    func loadFromPersistentStore() {
-        
-        guard let readingListURL = readingListURL else {return}
-        
+    func createBook(title: String, reasonToRead: String) {
+        var book = Book(title: title, reasonToRead: reasonToRead)
+        books.append(book)
+        saveToPersistentStore()
+    }
+    
+    func deleteBook(book: Book) {
+        if let bookIndex = books.firstIndex(of: book) {
+            books.remove(at: bookIndex)
+        }
+        saveToPersistentStore()
+    }
+
+    func updateHasBeenRead(for book: Book) {
+        if let bookIndex = books.firstIndex(of: book) {
+            books[bookIndex].hasBeenRead = !books[bookIndex].hasBeenRead
+        }
+        saveToPersistentStore()
+    }
+    
+    func editBook(book: Book, newTitle: String, newReasonToRead: String) {
+        if let bookIndex = books.firstIndex(of: book) {
+            books[bookIndex].reasonToRead = newReasonToRead
+            books[bookIndex].title = newTitle
+        }
+        saveToPersistentStore()
+    }
+    
+    func saveToPersistentStore() {
         do {
-            let booksData = try Data(contentsOf: readingListURL)
             
-            let decoder = PropertyListDecoder()
+            let encoder = PropertyListEncoder()
+            let booksData = try encoder.encode(books)
+            guard let readingListURL = readingListURL else { return }
+            try booksData.write(to: readingListURL)
             
-            let booksArray = try decoder.decode([Book].self, from: booksData)
-            
-            self.books = booksArray
-            
+            print("saved")
         } catch {
-            print("Error loading books from plist: \(error)")
+            print("Couldn't save list: \(error)")
+        }
+    }
+    
+    func loadFromPersistentStore() {
+        do {
+            guard let readingListURL = readingListURL else { return }
+            
+            let booksPlist = try Data(contentsOf: readingListURL)
+            let decoder = PropertyListDecoder()
+            let decodedBooks = try decoder.decode([Book].self, from: booksPlist)
+            self.books = decodedBooks
+            
+            print("recovered")
+        } catch {
+            print("Couldn't load books: \(error)")
         }
     }
 }
