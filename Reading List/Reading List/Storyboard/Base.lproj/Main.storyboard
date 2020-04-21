@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReadingListTbleViewCell" rowHeight="55" id="Syp-qU-mW4" customClass="BookTableViewCell" customModule="Reading_List" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ReadingListTableViewCell" rowHeight="55" id="Syp-qU-mW4" customClass="BookTableViewCell" customModule="Reading_List" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="55"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Syp-qU-mW4" id="fmy-Mx-qQa">
@@ -36,6 +36,9 @@
                                                 <constraint firstAttribute="width" secondItem="dML-gj-iU4" secondAttribute="height" multiplier="1:1" id="UFQ-Lx-TBZ"/>
                                             </constraints>
                                             <state key="normal" image="unchecked"/>
+                                            <connections>
+                                                <action selector="readButtonTapped:" destination="Syp-qU-mW4" eventType="touchUpInside" id="KVr-3r-70f"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <constraints>
@@ -48,6 +51,8 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="readButtonLabel" destination="dML-gj-iU4" id="48n-RQ-5ff"/>
+                                    <outlet property="titleLabel" destination="0pU-dV-TTf" id="KBU-Hg-Wr4"/>
                                     <segue destination="uB1-hT-blB" kind="show" identifier="showBookSegue" id="sE6-Hq-gE3"/>
                                 </connections>
                             </tableViewCell>
@@ -77,15 +82,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5t4-tP-ARU">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Book Title" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5t4-tP-ARU">
                                 <rect key="frame" x="20" y="188" width="374" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="onQ-oE-4j4">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Reasons to read" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="onQ-oE-4j4">
                                 <rect key="frame" x="20" y="242" width="374" height="234"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -106,13 +110,13 @@
                     <navigationItem key="navigationItem" title="Title" id="THp-dY-08L">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="ggq-yD-djq">
                             <connections>
-                                <action selector="saveBook:" destination="uB1-hT-blB" id="B2t-LC-mlK"/>
+                                <action selector="saveTapped:" destination="uB1-hT-blB" id="SBL-9E-yMX"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="reasonToReadTextField" destination="onQ-oE-4j4" id="OIO-Hy-IEV"/>
-                        <outlet property="titleTextField" destination="5t4-tP-ARU" id="i0g-LE-Pe5"/>
+                        <outlet property="reasonToReadTextField" destination="onQ-oE-4j4" id="uY2-kv-8bB"/>
+                        <outlet property="titleTextField" destination="5t4-tP-ARU" id="4Hn-EI-eO0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gYi-eH-7jd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -142,6 +146,6 @@
         <image name="unchecked" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="sE6-Hq-gE3"/>
+        <segue reference="5kc-9E-1B0"/>
     </inferredMetricsTieBreakers>
 </document>

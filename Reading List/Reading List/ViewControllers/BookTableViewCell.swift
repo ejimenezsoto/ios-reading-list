@@ -10,15 +10,27 @@ import UIKit
 
 class BookTableViewCell: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    @IBOutlet weak var titleLabel: UILabel!
+    
+    @IBOutlet weak var readButtonLabel: UIButton!
+    
+    @IBAction func readButtonTapped(_ sender: UIButton) {
+        delegate?.toggleHasBeenRead(for: self)
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    var delegate: BookTableViewDelegate?
+    
+    var book: Book? {
+        didSet {
+            updateViews()
+        }
     }
+    
+    func updateViews() {
+        titleLabel.text = book?.title
+    }
+    
 
 }
+
+

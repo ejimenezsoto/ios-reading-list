@@ -9,19 +9,17 @@
 import Foundation
 
 class BookController {
-    // CRUD - Create Read Update Delete
 
-    // 2
-    var books: [Book] = [Book(title: "Dune", reasonToRead: "its cool"), Book(title: "LoTR: Fellowship of The Rings", reasonToRead: "Why not")]
     
     init() {
         loadFromPersistentStore()
     }
     
-    // 6
+      var books: [Book] = [Book(title: "Dune", reasonToRead: "its cool"), Book(title: "LoTR: Fellowship of The Rings", reasonToRead: "Why not")]
+    
     @discardableResult func createBook(title: String, reasonToRead: String, hasBeenRead: Bool) -> Book {
       
-        var book  = Book(title: title, reasonToRead: reasonToRead, hasBeenRead: hasBeenRead)
+        let book  = Book(title: title, reasonToRead: reasonToRead, hasBeenRead: hasBeenRead)
         
         books.append(book)
         saveToPersistentStore()
@@ -76,28 +74,29 @@ class BookController {
    
     func saveToPersistentStore() {
         
-        guard let fileURL = readingListURL else {return}
-        
         do {
+            
+             guard let readingListURL = readingListURL else {return}
             
             let encoder = PropertyListEncoder()
             
             let booksData = try encoder.encode(books)
             
-            try booksData.write(to: fileURL)
+            try booksData.write(to: readingListURL)
+            
             
         } catch {
-            print("Error saving stars: \(error)")
+            print("Error saving books: \(error)")
         }
         
     }
 
     func loadFromPersistentStore() {
         
-        guard let fileURL = readingListURL else {return}
+        guard let readingListURL = readingListURL else {return}
         
         do {
-            let booksData = try Data(contentsOf: fileURL)
+            let booksData = try Data(contentsOf: readingListURL)
             
             let decoder = PropertyListDecoder()
             
@@ -106,7 +105,7 @@ class BookController {
             self.books = booksArray
             
         } catch {
-            print("Error loading stars from plist: \(error)")
+            print("Error loading books from plist: \(error)")
         }
     }
 }
